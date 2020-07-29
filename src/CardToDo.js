@@ -37,8 +37,6 @@ const CardToDo = props => {
               {props.toDo}
             </Typography>
           </CardContent>
-        </Grid>
-        <Grid item>
           <IconButton
             onClick={() => props.removeTodo(props.toDo)}
             aria-label="delete"

@@ -6,7 +6,7 @@ import CardToDo from "./CardToDo";
 import { TextField, Container, Grid, Button } from "@material-ui/core";
 
 const App = () => {
-  const [todo, setTodo] = useState(["hi"]);
+  const [todo, setTodo] = useState([]);
   const [input, setInput] = useState("");
 
   const handleChange = e => {
@@ -16,8 +16,6 @@ const App = () => {
   const updateTodo = e => {
     e.preventDefault();
     setTodo([...todo, input]);
-    console.log(todo);
-    console.log(input);
     setInput("");
   };
 
@@ -44,7 +42,12 @@ const App = () => {
           </Grid>
           <Grid item>
             <form
-              style={{ marginBottom: 10, display: "flex" }}
+              style={{
+                marginBottom: 10,
+                display: "flex",
+                alignItems: "center",
+                justify: "center"
+              }}
               onSubmit={updateTodo}
             >
               <TextField
@@ -55,7 +58,9 @@ const App = () => {
                 variant="outlined"
                 type="text"
               />
-              <Button onClick={() => setTodo([])}>Delete all</Button>
+              <Button style={{ margin: 10 }} onClick={() => setTodo([])}>
+                Delete all
+              </Button>
             </form>
           </Grid>
           {toDoList}
