@@ -6,6 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import DeleteIcon from "@material-ui/icons/Delete";
 import IconButton from "@material-ui/core/IconButton";
 import { Grid } from "@material-ui/core";
+
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
@@ -24,7 +25,7 @@ const useStyles = makeStyles({
   }
 });
 
-export default function CardToDo(props) {
+const CardToDo = props => {
   const classes = useStyles();
 
   return (
@@ -38,11 +39,16 @@ export default function CardToDo(props) {
           </CardContent>
         </Grid>
         <Grid item>
-          <IconButton aria-label="delete">
+          <IconButton
+            onClick={() => props.removeTodo(props.toDo)}
+            aria-label="delete"
+          >
             <DeleteIcon />
           </IconButton>
         </Grid>
       </Card>
     </Grid>
   );
-}
+};
+
+export default CardToDo;
