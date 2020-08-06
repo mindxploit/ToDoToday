@@ -3,11 +3,12 @@
 import React, { useState } from "react";
 import Welcome from "./Welcome";
 import CardToDo from "./CardToDo";
-import { TextField, Container, Grid, Button } from "@material-ui/core";
+import { TextField, Container, Grid, Button, Typography } from "@material-ui/core";
 
 const App = () => {
   const [todo, setTodo] = useState([]);
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState();
+  const [error, setError] = useState(false);
 
   const handleChange = e => {
     setInput(e.target.value);
@@ -15,8 +16,13 @@ const App = () => {
 
   const updateTodo = e => {
     e.preventDefault();
-    setTodo([...todo, input]);
-    setInput("");
+    if (!input) {
+      setError(true)
+    } else {
+      setError(false)
+      setTodo([...todo, input]);
+      setInput("");
+    }
   };
 
   const removeTodo = name => {
@@ -24,7 +30,9 @@ const App = () => {
   };
 
   let toDoList = todo.map(todo => (
-    <CardToDo key={todo + 1} toDo={todo} removeTodo={removeTodo} />
+    <Grid item>
+      <CardToDo key={todo + Math.floor(Math.random() * 100)} toDo={todo} removeTodo={removeTodo} />
+    </Grid>
   ));
 
   return (
@@ -63,6 +71,7 @@ const App = () => {
               </Button>
             </form>
           </Grid>
+          {error && <Typography  style={{ marginBottom: 15 }} variant="body2" color="textSecondary">Please enter a valid todo</Typography>}
           {toDoList}
         </Grid>
       </Container>
